@@ -4,18 +4,18 @@
 class Offices extends CI_Controller{
 
      
-      
+      public function __construct() {
+      parent::__construct();
+      $this->load->model("OfficeModel");
+    }
     public function index()
     {
         
         //echo"hello";
         $this->load->view('office');
     }
-    public function __construct() {
-      parent::__construct();
-      $this->load->model("OfficeModel");
-    }
-    public function enlist() {
+    
+    public function create() {
         $data = array(
        'Code' => $this->input->post('Code'),
        'City' => $this->input->post('City'),
@@ -27,9 +27,10 @@ class Offices extends CI_Controller{
 );
         // Converting $data in json
 $json_data['emp_data'] = json_encode($data);
+    
 
 // Send json encoded data to model
-$return = $this->OfficeModel->insert_json_in_db($json_data);
+$return = $this->OfficeModel->createOffice($json_data);
 if ($return == true) {
 $data['result_msg'] = 'Json data successfully inserted into database !';
 } else {
