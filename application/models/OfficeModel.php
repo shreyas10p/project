@@ -7,15 +7,18 @@ class OfficeModel extends CI_Model{
     /*public function index()       
 {
 }*/
-public function createOffice($json_data){
+public function createOffice($data){
    
-$this->db->insert('off_info',$json_data);
+$this->db->insert('office', $data);
 
     if ($this->db->affected_rows() > 0) {
 return true;
 } else {
 return false;
 }
+}
+public function getOffice(){
+    
 }
 
 

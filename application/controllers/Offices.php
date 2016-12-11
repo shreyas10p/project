@@ -19,23 +19,26 @@ class Offices extends CI_Controller{
         $data = array(
        'Code' => $this->input->post('Code'),
        'City' => $this->input->post('City'),
-       'Address1' => $this->input->post('Address1'),
-       'Address2' => $this->input->post('Address2'),
-            'dropdown' => $this->input->post('dropdown'),
+       'Addr1' => $this->input->post('Address1'),
+       'Addr2' => $this->input->post('Address2'),
+            'Postal' => $this->input->post('dropdown'),
             'Territory' => $this->input->post('Territory'),
             
 );
         // Converting $data in json
-$json_data['emp_data'] = json_encode($data);
-    
+//$json_data['emp_data'] = json_encode($data);
+    $this->OfficeModel->createOffice($data);
+$data['message'] = 'Data Inserted Successfully';
+//Loading View
+//$this->load->view('insert_view', $data);
 
 // Send json encoded data to model
-$return = $this->OfficeModel->createOffice($json_data);
-if ($return == true) {
-$data['result_msg'] = 'Json data successfully inserted into database !';
-} else {
-$data['result_msg'] = 'Please configure your database correctly';
-}
+//$return = $this->OfficeModel->createOffice($json_data);
+//if ($return == true) {
+//$data['result_msg'] = 'Json data successfully inserted into database !';
+//} else {
+//$data['result_msg'] = 'Please configure your database correctly';
+//}
 
 // Load view to show message
 $this->load->view("office", $data);
