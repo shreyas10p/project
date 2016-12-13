@@ -6,13 +6,22 @@ class Offices extends CI_Controller{
      
       public function __construct() {
       parent::__construct();
+       $this->load->database();
       $this->load->model("OfficeModel");
+      
     }
     public function index()
     {
         
         //echo"hello";
-        $this->load->view('office');
+        $this->load->database();  
+         //load the model  
+         $this->load->model('OfficeModel');  
+         //load the method of model  
+         $data['h']=$this->OfficeModel->getOffice();  
+         //return the data in view  
+         $this->load->view('office', $data);
+        
     }
     
     public function create() {
@@ -42,6 +51,16 @@ $data['message'] = 'Data Inserted Successfully';
 
 // Load view to show message
 $this->load->view("office", $data);
+}
+public function enlist(){
+    $this->db->select("*");
+        $this->db->from('office');  
+        $query = $this->db->get();
+
+        foreach($query->result() as $row)
+        {
+            echo json_encode($row);
+        } 
 }
 
      

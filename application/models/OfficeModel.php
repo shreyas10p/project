@@ -7,6 +7,18 @@ class OfficeModel extends CI_Model{
     /*public function index()       
 {
 }*/
+   function __construct()  
+      {  
+         // Call the Model constructor  
+         parent::__construct();  
+      }  
+
+    public function getOffice() {
+        $query = $this->db->get('office');  
+         return $query;  
+       // $this->load->view('office', $result);
+    }
+
 public function createOffice($data){
    
 $this->db->insert('office', $data);
@@ -17,9 +29,7 @@ return true;
 return false;
 }
 }
-public function getOffice(){
-    
-}
+
 
 
 /*public function getOffices()

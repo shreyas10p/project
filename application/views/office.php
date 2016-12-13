@@ -1,6 +1,18 @@
 
 <html lang="en">    
-    
+    <head>
+        <style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    align-content: center;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+        </style>
+    </head>
     <body>
         <div align="center">
         
@@ -72,6 +84,36 @@
             <br>
             </p>
         </div>
+        <table align="center">  
+            
+      <tbody>  
+         <tr>  
+            <td><input type="checkbox" name="name1" />&nbsp;</td>
+            <td>Code</td>  
+            <td>City</td> 
+            <td>Address1</td>
+            <td>Address2</td>
+            <td>Postal</td>
+            <td>Territory</td>
+         </tr>  
+         <?php  
+         foreach ($h->result() as $row)  
+         {  
+            ?><tr>  
+           <td><input type="checkbox" name="check[]"/></td>
+            <td><?php echo $row->Code;?></td>  
+            <td><?php echo $row->City;?></td>
+            <td><?php echo $row->Addr1;?></td>  
+            <td><?php echo $row->Addr2;?></td>  
+            <td><?php echo $row->Postal;?></td>
+            <td><?php echo $row->Territory;?></td>
+            
+            </tr>  
+         <?php }  
+         ?>  
+      </tbody>  
+   </table>  
+
         
     </body>
     
