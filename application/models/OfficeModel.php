@@ -23,12 +23,16 @@ public function createOffice($data){
    
 $this->db->insert('office', $data);
 
-    if ($this->db->affected_rows() > 0) {
-return true;
-} else {
-return false;
+    
 }
+public function searchModel($keyword){
+
+  $this->db->where('Code',$keyword);
+  $query  =   $this->db->get('office');
+  //echo $this->db->last_query();
+  return $query;
 }
+
 
 
 

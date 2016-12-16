@@ -13,31 +13,35 @@ class Offices extends CI_Controller{
     public function index()
     {
         
-        //echo"hello";
+        $data = array();
+        
+        
         $this->load->database();  
          //load the model  
          $this->load->model('OfficeModel');  
          //load the method of model  
          $data['h']=$this->OfficeModel->getOffice();  
          //return the data in view  
-         $this->load->view('office', $data);
+         $this->load->view('office1', $data);
+      
         
     }
     
     public function create() {
+        $offices = array();
         $data = array(
        'Code' => $this->input->post('Code'),
        'City' => $this->input->post('City'),
        'Addr1' => $this->input->post('Address1'),
        'Addr2' => $this->input->post('Address2'),
-            'Postal' => $this->input->post('dropdown'),
+            'Postal' => $this->input->post('Postal'),
             'Territory' => $this->input->post('Territory'),
             
 );
         // Converting $data in json
 //$json_data['emp_data'] = json_encode($data);
-    $this->OfficeModel->createOffice($data);
-$data['message'] = 'Data Inserted Successfully';
+    $data =  $this->OfficeModel->createOffice($data);
+    $offices['h']=$this->OfficeModel->getOffice();
 //Loading View
 //$this->load->view('insert_view', $data);
 
@@ -50,8 +54,16 @@ $data['message'] = 'Data Inserted Successfully';
 //}
 
 // Load view to show message
-$this->load->view("office", $data);
+$this->load->view("office1", $offices);
 }
+ public function search(){
+          $data = array();
+          $keyword    =   $this->input->post('keyword');
+          $data['h']    =   $this->OfficeModel->searchModel($keyword);
+           $this->load->view('office1', $data);
+
+
+  }
 public function enlist(){
     $this->db->select("*");
         $this->db->from('office');  
